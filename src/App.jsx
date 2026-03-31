@@ -109,12 +109,7 @@ html{scroll-behavior:smooth}
   .g4{grid-template-columns:1fr 1fr!important}
   .contact-grid{grid-template-columns:1fr!important}
 }
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  background-color: #1B365D; /* Set this to match your footer color (C.p) */
-}
+
 `;
 
 // ─── SHARED BITS ────────────────────────────────────────────────────────
@@ -149,13 +144,30 @@ const Nav=({C,ff,page,go})=>{
 const Foot=({C,ff,go})=>{
   const nav=p=>e=>{e.preventDefault();go(p);window.scrollTo(0,0)};
   return(
-    <footer style={{background:C.p,color:"rgba(255,255,255,0.8)",fontFamily:ff,padding:"44px 24px 28px"}}>
+    <footer style={{
+      background:C.p,
+      color:"rgba(255,255,255,0.8)",
+      fontFamily:ff,
+      padding:"44px 24px 28px", // This is the bottom padding
+      margin: 0                 // Force reset footer margin
+    }}>
       <div className="g3" style={{maxWidth:1100,margin:"0 auto",display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:28}}>
-        <div><div style={{fontWeight:800,fontSize:16,color:"#FFF",marginBottom:6}}>{D.biz.name}</div><p style={{fontSize:13,lineHeight:1.6}}>Serving {D.biz.area}.</p>{D.biz.license&&<p style={{fontSize:11,opacity:0.4,marginTop:4}}>License #{D.biz.license}</p>}</div>
-        <div><div style={{fontWeight:700,fontSize:11,color:"#FFF",marginBottom:6,textTransform:"uppercase",letterSpacing:1}}>Pages</div><div style={{display:"flex",flexDirection:"column",gap:4}}>{(D.plan==="standard"?["home","services","service-area","contact"]:["home","services","contact"]).map(p=><a key={p} href="#" onClick={nav(p)} style={{color:"rgba(255,255,255,0.7)",textDecoration:"none",fontSize:13}}>{p==="service-area"?"Service Area":p[0].toUpperCase()+p.slice(1)}</a>)}</div></div>
-        <div><div style={{fontWeight:700,fontSize:11,color:"#FFF",marginBottom:6,textTransform:"uppercase",letterSpacing:1}}>Contact</div><p style={{fontSize:14,fontWeight:700,margin:"3px 0"}}>{D.biz.phone}</p>{D.biz.addr&&<p style={{fontSize:12,margin:"3px 0"}}>{D.biz.addr}</p>}{D.hrs&&<><p style={{fontSize:11,margin:"6px 0 2px",opacity:0.5}}>{D.hrs.wd}</p><p style={{fontSize:11,opacity:0.5}}>{D.hrs.we}</p></>}</div>
+        {/* ... your footer columns ... */}
       </div>
-      <div style={{maxWidth:1100,margin:"28px auto 0",borderTop:"1px solid rgba(255,255,255,0.12)",paddingTop:16,fontSize:11,opacity:0.35,textAlign:"center"}}>© {new Date().getFullYear()} {D.biz.name}</div>
+      
+      {/* Target this div specifically: it usually has the margin pushing the bottom */}
+      <div style={{
+        maxWidth:1100,
+        margin:"28px auto 0", // Change the '0' at the end to '0' explicitly if needed
+        borderTop:"1px solid rgba(255,255,255,0.12)",
+        paddingTop:16,
+        fontSize:11,
+        opacity:0.35,
+        textAlign:"center",
+        marginBottom: 0       // ADD THIS LINE
+      }}>
+        © {new Date().getFullYear()} {D.biz.name}
+      </div>
     </footer>
   );
 };
