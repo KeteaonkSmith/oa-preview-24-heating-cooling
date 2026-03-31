@@ -109,6 +109,12 @@ html{scroll-behavior:smooth}
   .g4{grid-template-columns:1fr 1fr!important}
   .contact-grid{grid-template-columns:1fr!important}
 }
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #1B365D; /* Set this to match your footer color (C.p) */
+}
 `;
 
 // ─── SHARED BITS ────────────────────────────────────────────────────────
